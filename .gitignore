@@ -1,0 +1,11 @@
+.settings/
+bin/
+.classpath
+.project
+*.png
+*.idea
+*.iml
+.DS_store 
+.mvn/
+pom.xml
+	
