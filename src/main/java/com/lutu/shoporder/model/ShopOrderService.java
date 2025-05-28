@@ -15,9 +15,21 @@ public class ShopOrderService {
 		return shopOrderVO;
 	}
 
+
 	public ShopOrderVO updateShopOrder(ShopOrderVO shopOrderVO) {
-		dao.update(shopOrderVO);
-		return shopOrderVO;
+	    if (shopOrderVO == null) {
+	        throw new IllegalArgumentException("ShopOrderVO 不可為空");
+	    }
+	    if (shopOrderVO.getShopOrderId() == null || shopOrderVO.getMemId() == null) {
+	        throw new IllegalArgumentException("訂單ID或會員ID不可為空");
+	    }
+	    
+	    try {
+	        dao.update(shopOrderVO);
+	        return shopOrderVO;
+	    } catch (RuntimeException e) {
+	        throw new RuntimeException("更新訂單失敗: " + e.getMessage());
+	    }
 	}
 
 	public ShopOrderVO getOneShopOrder(Integer shopOrderId) {
@@ -28,5 +40,13 @@ public class ShopOrderService {
 		return dao.getAll();
 	}
 
-	
+//	public ShopOrderVO updateShopOrder(Byte shopOrderShipment, Integer shopOrderShipFee, Integer beforeDiscountAmount,
+//			String discountCodeId, Integer discountAmount, Integer afterDiscountAmount, Byte shopOrderPayment,
+//			String orderName, String orderEmail, String orderPhone, String orderShippingAddress, String shopOrderNote,
+//			LocalDateTime shopOrderShipDate, Byte shopOrderStatus, Byte shopReturnApply, Integer shopOrderId,
+//			Integer memId) {
+//		ShopOrderVO sovo = new ShopOrderVO();
+//		return sovo;
+//	}
+
 }
