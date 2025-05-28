@@ -13,7 +13,7 @@ public class ShopOrderDAO implements ShopOrderDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/lutudb?serverTimezone=Asia/Taipei";
 	String userid = "root";
-	String passwd = "password";
+	String passwd = "PASSWORD";
 
 	private static final String INSERT_STMT = "INSERT INTO shop_order (shop_order_id,mem_id,shop_order_date,shop_order_shipment,shop_order_ship_fee,before_discount_amount,discount_code_id,discount_amount,after_discount_amount,shop_order_payment,order_name,order_email,order_phone,order_shipping_address,shop_order_note,shop_order_ship_date,shop_order_status,shop_return_apply) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE = "UPDATE shop_order set shop_order_shipment = ?,shop_order_ship_fee = ?,before_discount_amount = ?,discount_code_id = ?,discount_amount = ?,after_discount_amount = ?,shop_order_payment = ?,order_name = ?,order_email = ?,order_phone = ?,order_shipping_address = ?,shop_order_note = ?,shop_order_ship_date = ?,shop_order_status = ?,shop_return_apply = ? where shop_order_id = ? AND mem_id = ?";
