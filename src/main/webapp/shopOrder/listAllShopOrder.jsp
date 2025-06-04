@@ -88,7 +88,7 @@ th, td {
 			<th>訂單備註</th>
 			<th>出貨日期</th>
 			<th>訂單狀態</th>
-			<th>訂單狀態</th>
+			<th>退貨申請</th>
 			<th>修改</th>
 			
 		</tr>
@@ -113,7 +113,7 @@ th, td {
 			<td>${sovo.shopOrderNote}</td>
 			<td>${sovo.shopOrderShipDate}</td>
 			<td>${sovo.shopOrderStatus}</td>
-			<td>${sovo.shopOrderStatus}</td>
+			<td>${sovo.shopReturnApply}</td>
 
 				<td>
 					<FORM METHOD="post"

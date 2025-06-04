@@ -40,13 +40,6 @@ public class ShopOrderService {
 		return dao.getAll();
 	}
 
-//	public ShopOrderVO updateShopOrder(Byte shopOrderShipment, Integer shopOrderShipFee, Integer beforeDiscountAmount,
-//			String discountCodeId, Integer discountAmount, Integer afterDiscountAmount, Byte shopOrderPayment,
-//			String orderName, String orderEmail, String orderPhone, String orderShippingAddress, String shopOrderNote,
-//			LocalDateTime shopOrderShipDate, Byte shopOrderStatus, Byte shopReturnApply, Integer shopOrderId,
-//			Integer memId) {
-//		ShopOrderVO sovo = new ShopOrderVO();
-//		return sovo;
-//	}
+
 
 }

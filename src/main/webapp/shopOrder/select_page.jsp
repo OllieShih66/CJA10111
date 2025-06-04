@@ -96,7 +96,7 @@
 <h3>商品訂單管理</h3>
 
 <ul>
-  <li><a href='addCamp.jsp'>新增</a> 商品訂單資料</li>
+  <li><a href='addShopOrder.jsp'>新增</a> 商品訂單資料</li>
 </ul>
 
 </body>

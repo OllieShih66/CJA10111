@@ -13,9 +13,9 @@ public class ShopOrderDAO implements ShopOrderDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/lutudb?serverTimezone=Asia/Taipei";
 	String userid = "root";
-	String passwd = "PASSWORD";
+	String passwd = "620879";
 
-	private static final String INSERT_STMT = "INSERT INTO shop_order (shop_order_id,mem_id,shop_order_date,shop_order_shipment,shop_order_ship_fee,before_discount_amount,discount_code_id,discount_amount,after_discount_amount,shop_order_payment,order_name,order_email,order_phone,order_shipping_address,shop_order_note,shop_order_ship_date,shop_order_status,shop_return_apply) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO shop_order (mem_id,shop_order_shipment,shop_order_ship_fee,before_discount_amount,discount_code_id,discount_amount,after_discount_amount,shop_order_payment,order_name,order_email,order_phone,order_shipping_address,shop_order_note,shop_order_ship_date,shop_order_status,shop_return_apply) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE = "UPDATE shop_order set shop_order_shipment = ?,shop_order_ship_fee = ?,before_discount_amount = ?,discount_code_id = ?,discount_amount = ?,after_discount_amount = ?,shop_order_payment = ?,order_name = ?,order_email = ?,order_phone = ?,order_shipping_address = ?,shop_order_note = ?,shop_order_ship_date = ?,shop_order_status = ?,shop_return_apply = ? where shop_order_id = ? AND mem_id = ?";
 	private static final String GET_ONE_STMT = "SELECT * FROM shop_order where shop_order_id = ?";
 	private static final String GET_ALL_STMT = "SELECT * FROM shop_order order by shop_order_id";
@@ -33,31 +33,38 @@ public class ShopOrderDAO implements ShopOrderDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, ShopOrderVO.getShopOrderId());
-			pstmt.setInt(2, ShopOrderVO.getMemId());
-			pstmt.setTimestamp(3, java.sql.Timestamp.valueOf(ShopOrderVO.getShopOrderDate()));
-			pstmt.setByte(4, ShopOrderVO.getShopOrderShipment());
-			pstmt.setInt(5, ShopOrderVO.getShopOrderShipFee());
-			pstmt.setInt(6, ShopOrderVO.getBeforeDiscountAmount());
-			pstmt.setString(7, ShopOrderVO.getDiscountCodeId());
+			
+			pstmt.setInt(1, ShopOrderVO.getMemId());
+			pstmt.setByte(2, ShopOrderVO.getShopOrderShipment());
+			pstmt.setInt(3, ShopOrderVO.getShopOrderShipFee());
+			pstmt.setInt(4, ShopOrderVO.getBeforeDiscountAmount());
+			
+			
+			// 判斷是否為 null，然後用 setNull() 或 setInt()
+			if (ShopOrderVO.getDiscountCodeId() == null || ShopOrderVO.getDiscountCodeId().trim().isEmpty()) {
+				pstmt.setNull(5, java.sql.Types.VARCHAR);
+			} else {
+				pstmt.setString(5, ShopOrderVO.getDiscountCodeId());
+			}
+			System.out.println("discountCodeId=[" + ShopOrderVO.getDiscountCodeId() + "]");
 			
 			// 判斷是否為 null，然後用 setNull() 或 setInt()
 			if(ShopOrderVO.getDiscountAmount() != null) {
-				pstmt.setInt(8, ShopOrderVO.getDiscountAmount());
+				pstmt.setInt(6, ShopOrderVO.getDiscountAmount());
 			} else {
-				pstmt.setNull(8, java.sql.Types.INTEGER);
+				pstmt.setNull(6, java.sql.Types.INTEGER);
 			}
 			
-			pstmt.setInt(9, ShopOrderVO.getAfterDiscountAmount());
-			pstmt.setByte(10, ShopOrderVO.getShopOrderPayment());
-			pstmt.setString(11, ShopOrderVO.getOrderName());
-			pstmt.setString(12, ShopOrderVO.getOrderEmail());
-			pstmt.setString(13, ShopOrderVO.getOrderPhone());
-			pstmt.setString(14, ShopOrderVO.getOrderShippingAddress());
-			pstmt.setString(15, ShopOrderVO.getShopOrderNote());
-			pstmt.setTimestamp(16, java.sql.Timestamp.valueOf(ShopOrderVO.getShopOrderShipDate()));
-			pstmt.setByte(17, ShopOrderVO.getShopOrderStatus());
-			pstmt.setByte(18, ShopOrderVO.getShopReturnApply());
+			pstmt.setInt(7, ShopOrderVO.getAfterDiscountAmount());
+			pstmt.setByte(8, ShopOrderVO.getShopOrderPayment());
+			pstmt.setString(9, ShopOrderVO.getOrderName());
+			pstmt.setString(10, ShopOrderVO.getOrderEmail());
+			pstmt.setString(11, ShopOrderVO.getOrderPhone());
+			pstmt.setString(12, ShopOrderVO.getOrderShippingAddress());
+			pstmt.setString(13, ShopOrderVO.getShopOrderNote());
+			pstmt.setTimestamp(14, java.sql.Timestamp.valueOf(ShopOrderVO.getShopOrderShipDate()));
+			pstmt.setByte(15, ShopOrderVO.getShopOrderStatus());
+			pstmt.setByte(16, ShopOrderVO.getShopReturnApply());
 
 			pstmt.executeUpdate();
 
@@ -101,7 +108,16 @@ public class ShopOrderDAO implements ShopOrderDAO_interface {
 			pstmt.setByte(1, ShopOrderVO.getShopOrderShipment());
 			pstmt.setInt(2, ShopOrderVO.getShopOrderShipFee());
 			pstmt.setInt(3, ShopOrderVO.getBeforeDiscountAmount());
-			pstmt.setString(4, ShopOrderVO.getDiscountCodeId());
+			
+			// 判斷是否為 null，然後用 setNull() 或 setInt()
+			if (ShopOrderVO.getDiscountCodeId() == null || ShopOrderVO.getDiscountCodeId().trim().isEmpty()) {
+				pstmt.setNull(4, java.sql.Types.VARCHAR);
+			} else {
+				pstmt.setString(4, ShopOrderVO.getDiscountCodeId());
+			}
+			
+			System.out.println("discountCodeId=[" + ShopOrderVO.getDiscountCodeId() + "]");
+
 			
 			// 判斷是否為 null，然後用 setNull() 或 setInt()
 			if (ShopOrderVO.getDiscountAmount() != null) {
